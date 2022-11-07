@@ -2,23 +2,37 @@ name: deploy ansible
 
 on: [push]
 
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: checkout repo
+#       uses: actions/checkout@v2
+#     - name: Lint Ansible Playbook
+#       uses: ansible/ansible-lint-action@main
+#       with:
+#         targets: ""
+#   deployAnsible:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v1
+#     - uses: ./.github/actions/
+#       with: 
+#         playbook: logstash-playbook.yml
+#         inventory: localhost
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-    - name: checkout repo
-      uses: actions/checkout@v2
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@main
-      with:
-        targets: ""
-  deployAnsible:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: ./.github/actions/
-      with: 
-        playbook: logstash-playbook.yml
-        inventory: localhost
 
+    steps:
+      # Important: This sets up your GITHUB_WORKSPACE environment variable
+      - uses: actions/checkout@v2
+
+      - name: Run ansible-lint
+        # replace `main` with any valid ref, or tags like `v6`
+        uses: ansible-community/ansible-lint-action@main
+        # optional:
+        # with:
+        #   path: "playbooks/"  # <-- only one value is allowed
