@@ -17,9 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: ./.github/actions/
       with: 
-        playbook: logstash-playbook.yml
+        playbook: ../actions/logstash-playbook.yml
         inventory: localhost
 
 # jobs:
