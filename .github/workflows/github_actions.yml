@@ -21,4 +21,4 @@ jobs:
       with: 
         playbook: logstash-playbook.yml
         inventory: localhost
-        
+
