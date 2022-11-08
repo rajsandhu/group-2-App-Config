@@ -21,6 +21,7 @@ jobs:
         
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
+        working-directory: ./
         with:
           # Required, playbook filepath
           playbook: playbook.yml
