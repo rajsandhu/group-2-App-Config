@@ -20,7 +20,7 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
-          playbook: ./actions/playbook.yml
+          playbook: ./ansible/playbook.yml
           options: |
             --verbose
 
