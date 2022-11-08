@@ -27,6 +27,7 @@ jobs:
         with:
           # Required, playbook filepath
           playbook: playbook.yml
+          directory: ./ansible
           options: |
             --verbose
 

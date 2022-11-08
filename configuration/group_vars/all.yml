@@ -1,2 +1,0 @@
-ssh_local: "~/.ssh/group-2-elk"
-ssh_remote: "/home/ubuntu/.ssh/"
