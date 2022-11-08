@@ -2,15 +2,15 @@ name: deploy ansible
 
 on: [push]
 
-- name: Run playbook
-  uses: dawidd6/action-ansible-playbook@v2
-  with:
-    # Required, playbook filepath
-    playbook: playbook.yml
-    # Optional, directory where playbooks live
-    directory: ../actions
-    options: |
-      --verbose
+  - name: Run playbook
+    uses: dawidd6/action-ansible-playbook@v2
+    with:
+      # Required, playbook filepath
+      playbook: playbook.yml
+      # Optional, directory where playbooks live
+      directory: ../actions
+      options: |
+        --verbose
 
 # jobs:
 #   build:
