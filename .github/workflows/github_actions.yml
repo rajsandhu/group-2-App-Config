@@ -2,15 +2,29 @@ name: deploy ansible
 
 on: [push]
 
-  - name: Run playbook
-    uses: dawidd6/action-ansible-playbook@v2
-    with:
-      # Required, playbook filepath
-      playbook: playbook.yml
-      # Optional, directory where playbooks live
-      directory: ../actions
-      options: |
-        --verbose
+jobs:
+  ansible-deployment:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::463702550967:role/github-actions-oidc
+          aws-region: "eu-central-1"
+
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          # Required, playbook filepath
+          playbook: playbook.yml
+          # Optional, directory where playbooks live
+          directory: ../actions
+          options: |
+            --verbose
 
 # jobs:
 #   build:
