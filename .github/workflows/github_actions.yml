@@ -2,24 +2,34 @@ name: deploy ansible
 
 on: [push]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout repo
-      uses: actions/checkout@v2
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@wip/v6
-      with:
-        targets: ""
-  deployAnsible:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-      with: 
-        playbook: ../actions/logstash-playbook.yml
-        inventory: localhost
+- name: Run playbook
+  uses: dawidd6/action-ansible-playbook@v2
+  with:
+    # Required, playbook filepath
+    playbook: playbook.yml
+    # Optional, directory where playbooks live
+    directory: ../actions
+    options: |
+      --verbose
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: checkout repo
+#       uses: actions/checkout@v2
+#     - name: Lint Ansible Playbook
+#       uses: ansible/ansible-lint-action@wip/v6
+#       with:
+#         targets: ""
+#   deployAnsible:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v1
+#       with: 
+#         playbook: ../actions/playbook.yml
+        
 
 # jobs:
 #   build:
