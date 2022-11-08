@@ -10,6 +10,9 @@ jobs:
       contents: read
       id-token: write
     steps:
+      - name: Clone/Checkout your repository code
+        uses: actions/checkout@v2
+        
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
