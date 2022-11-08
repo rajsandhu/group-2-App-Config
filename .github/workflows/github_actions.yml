@@ -17,6 +17,9 @@ jobs:
           aws-region: "eu-central-1"
 
       - name: Run playbook
+        run: ls -al
+        
+      - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
