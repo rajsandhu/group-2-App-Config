@@ -20,8 +20,8 @@ jobs:
       #   run: ls ../../_actions/dawidd6/action-ansible-playbook -al
         
       - name: Run playbook
-        uses: dawidd6/action-ansible-playbook@v2
         working-directory: ./
+        uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
           playbook: playbook.yml
