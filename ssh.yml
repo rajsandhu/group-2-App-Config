@@ -1,8 +1,6 @@
-- hosts: localhost
-  tasks:
+---
     - name: Copy file with owner and permissions
       ansible.builtin.copy:
         content: "{{ lookup('amazon.aws.aws_secret', 'ssh_key') }}"
         mode: 0666
         dest: ./group-2-elk
-        

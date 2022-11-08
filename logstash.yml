@@ -1,7 +1,4 @@
-- hosts: logstash_server
-  become: yes
-
-  tasks:
+---
     - name: Copy the Value file to the webserver
       copy:
         src: "./ports.conf"
