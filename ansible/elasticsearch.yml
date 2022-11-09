@@ -1,8 +1,8 @@
 ---
-    - name: Copy the Value file to the webserver
-      copy:
-        src: "./ports.conf"
-        dest: "/etc/logstash/conf.d/"
+    # - name: Copy the Value file to the webserver
+    #   copy:
+    #     src: "./ports.conf"
+    #     dest: "/etc/logstash/conf.d/"
         
     - name: Add an Apt signing key
       ansible.builtin.apt_key:
@@ -19,6 +19,11 @@
       apt:
         name: elasticsearch
         update_cache: yes
+    - name: Disable xpack security
+      lineinfile:
+        destfile: /etc/elasticsearch/elasticsearch.yml
+        regexp: '#xpack.security.enabled: true'
+        line: 'xpack.security.enabled: false'
 
     # Enable Elasticsearch service
     - name: Enable Elasticsearch service
