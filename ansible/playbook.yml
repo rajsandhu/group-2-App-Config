@@ -9,3 +9,9 @@
   tasks:
     - name: Launch Logstash Playbook
       include_tasks: logstash.yml
+
+- hosts: elasticsearch_server
+  become: yes
+  tasks:
+    - name: Launch Elasticsearch Playbook
+      include_tasks: elasticsearch.yml
