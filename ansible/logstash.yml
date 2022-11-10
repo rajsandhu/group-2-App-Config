@@ -1,0 +1,34 @@
+---
+    - name: Copy the Value file to the webserver
+      copy:
+        src: "./ports.conf"
+        dest: "/etc/logstash/conf.d/"
+        
+    - name: Add an Apt signing key
+      ansible.builtin.apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Adding APT repository
+      apt_repository:
+        repo: deb https://artifacts.elastic.co/packages/8.x/apt stable main
+        state: present
+
+    # Installing Logstash
+    - name: Update repositories cache and install Logstash
+      apt:
+        name: logstash
+        update_cache: yes
+
+    # Enable Logstash service
+    - name: Enable Logstash service
+      systemd:
+        name: logstash
+        enabled: yes
+    # Start Logstash service
+    - name: Start Logstash service
+      systemd:
+        name: logstash
+        state: started
+        daemon_reload: yes
+

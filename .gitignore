@@ -3,5 +3,8 @@
 
 ### Ansible ###
 *.retry
+group-2-elk
+ssh.cfg
+configuration/
 
 # End of https://www.toptal.com/developers/gitignore/api/ansible

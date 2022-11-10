@@ -1,0 +1,35 @@
+---
+    - name: Add an Apt signing key
+      ansible.builtin.apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Adding APT repository
+      apt_repository:
+        repo: deb https://artifacts.elastic.co/packages/8.x/apt stable main
+        state: present
+
+    # Installing Elasticsearch
+    - name: Update repositories cache and install Elasticsearch
+      apt:
+        name: elasticsearch
+        update_cache: yes
+        
+    - name: Disable xpack security
+      lineinfile:
+        destfile: /etc/elasticsearch/elasticsearch.yml
+        regexp: '#xpack.security.enabled: true'
+        line: 'xpack.security.enabled: false'
+
+    # Enable Elasticsearch service
+    - name: Enable Elasticsearch service
+      systemd:
+        name: elasticsearch
+        enabled: yes
+    # Start Elasticsearch service
+    - name: Start Elasticsearch service
+      systemd:
+        name: elasticsearch
+        state: started
+        daemon_reload: yes
+
